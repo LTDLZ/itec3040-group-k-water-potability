@@ -12,6 +12,10 @@ project is for educational use and cannot replace laboratory testing.
 Download `water_potability.csv` from the
 [Kaggle Water Quality dataset](https://www.kaggle.com/datasets/adityakadiwal/water-potability).
 
+## Project Report
+
+Use the [shared Google Doc](https://docs.google.com/document/d/1gO0KoELg8l9ygaZ5QrnrgAlesLO77nwmD5nUdw_L7UU/edit?tab=t.0) to draft and review the final report. Use this repository for code, setup instructions, and testing.
+
 ## Contributing
 
 - Create a branch for your part and open a pull request when it's ready
