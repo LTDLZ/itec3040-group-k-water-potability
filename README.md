@@ -27,5 +27,43 @@ Use the [shared Google Doc](https://docs.google.com/document/d/1gO0KoELg8l9ygaZ5
 
 ## Running the project
 
-We'll add the setup and run commands once the preprocessing, model
-training, and Streamlit app are connected and tested together.
+### Train the models
+
+Run these commands from the repository root on a branch containing
+`train_models.py`. Keep `water_potability.csv` next to that script. If the
+CSV is missing, download it using the dataset link above.
+
+The training workflow was verified on Windows (64-bit) with Python 3.14.6.
+`requirements.txt` pins the packages from that environment.
+
+Windows (PowerShell):
+
+```powershell
+py -3.14 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe train_models.py
+```
+
+macOS or Linux (with Python 3.14 installed):
+
+```bash
+python3.14 -m venv .venv
+./.venv/bin/python -m pip install -r requirements.txt
+./.venv/bin/python train_models.py
+```
+
+The script makes a stratified 80/20 split using seed 42. It prints test
+accuracy and training cross-validation scores, then writes these files:
+
+- `models/baseline.joblib`
+- `models/logistic_regression.joblib`
+- `models/random_forest.joblib`
+- `results/predictions.csv`
+
+With the assigned CSV, expect 2,620 training samples and 656 test
+predictions. Rerunning the script replaces the files listed above in
+the current checkout.
+
+These instructions cover preprocessing and model training. The
+Streamlit app has its own setup and run steps, which will be documented
+after integration testing.
