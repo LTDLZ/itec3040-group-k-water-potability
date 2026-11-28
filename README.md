@@ -52,17 +52,21 @@ python3.14 -m venv .venv
 ./.venv/bin/python train_models.py
 ```
 
-The script makes a stratified 80/20 split using seed 42. It prints test
-accuracy and training cross-validation scores, then writes these files:
+The script uses DataPreprocess.py to create a stratified
+70/15/15 training, validation, and testing split using seed 42.
+It prints validation accuracy, five-fold stratified
+cross-validation scores, standard deviations, and testing
+accuracy, then writes these files:
 
 - `models/baseline.joblib`
 - `models/logistic_regression.joblib`
 - `models/random_forest.joblib`
 - `results/predictions.csv`
 
-With the assigned CSV, expect 2,620 training samples and 656 test
-predictions. Rerunning the script replaces the files listed above in
-the current checkout.
+With the assigned CSV, expect 2,293 training samples,
+491 validation samples, and 492 testing samples.
+Rerunning the script replaces the saved models and
+prediction outputs listed above in the current checkout.
 
 These instructions cover preprocessing and model training. The
 Streamlit app has its own setup and run steps, which will be documented
