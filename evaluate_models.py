@@ -146,3 +146,60 @@ plt.close()
 
 print("\nEvaluation completed successfully.")
 print("Results saved in: results/evaluation/")
+
+
+# 6. Random Forest Feature Importance
+# Check which water-quality measurements the model used most.
+
+import joblib
+
+random_forest = joblib.load(
+    project_folder / "models" / "random_forest.joblib"
+)
+
+# Get the trained classifier from the saved pipeline.
+classifier = random_forest.named_steps["classifier"]
+
+# Get the feature names and importance values.
+feature_names = random_forest.feature_names_in_
+importance_values = classifier.feature_importances_
+
+feature_importance = pd.DataFrame({
+    "Feature": feature_names,
+    "Importance": importance_values
+})
+
+# Sort features from most important to least important.
+feature_importance = feature_importance.sort_values(
+    by="Importance",
+    ascending=False
+)
+
+# Save the feature-importance results.
+feature_importance.to_csv(
+    output_folder / "feature_importance.csv",
+    index=False
+)
+
+# Create the feature-importance graph.
+plt.figure(figsize=(9, 6))
+plt.barh(
+    feature_importance["Feature"][::-1],
+    feature_importance["Importance"][::-1]
+)
+
+plt.xlabel("Feature Importance")
+plt.ylabel("Water Quality Measurement")
+plt.title("Random Forest Feature Importance")
+plt.tight_layout()
+
+plt.savefig(
+    output_folder / "random_forest_feature_importance.png",
+    dpi=300
+)
+
+plt.close()
+
+print("\nRANDOM FOREST FEATURE IMPORTANCE")
+print(feature_importance.to_string(index=False))
+print("\nFeature importance graph saved successfully.")
